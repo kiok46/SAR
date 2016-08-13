@@ -1,7 +1,7 @@
 '''
 Team: Atom
 
-@Author Kuldeep Singh Grewal <kuldeepbb.grewal@gmail.com>
+@author Kuldeep Singh Grewal <kuldeepbb.grewal@gmail.com>
 '''
 
 import json
@@ -30,6 +30,8 @@ class Common():
         api = self.get_api()
         rs = urlopen(api).read()
         result = json.loads(rs)
-        out_file = open("reviews.json", "w")
-        json.dump(result, out_file, indent=4)
-        out_file.close()
+        return result
+
+        # out_file = open("reviews.json", "w")
+        # json.dump(result, out_file, indent=4)
+        # out_file.close()
