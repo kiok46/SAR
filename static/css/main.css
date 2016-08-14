@@ -6,10 +6,14 @@ body {
   text-align: center;
 }
 
+input {
+  margin: 0 !important;
+}
+
 
 form {
   width: 450px;
-  margin: 17% auto;
+  margin: 8% auto;
 }
 
 
@@ -74,4 +78,29 @@ input:focus {
   outline: none;
   outline: 2px solid #E86C8D;
   box-shadow: 0 0 2px #E86C8D;
+}
+
+.card-image img {
+    padding: 10px !important;
+}
+
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    max-height: 100% !important;
+    cursor: pointer;
+}
+
+.card .card-title {
+    font-size: 20px !important;
+    font-weight: 300;
+    color: #000 !important;
+}
+
+.card.small {
+    height: 350px !important;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.hide {
+    display: none !important;
 }
