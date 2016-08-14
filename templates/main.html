@@ -1,24 +1,51 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>SAR</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>SAR</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
 
-  <body>
-    <form action="" method="" name="" id="">
+<body>
+  <form name="ohyeah" id="lihijuice">
     <input type='hidden' name='' value='' />
-      <div class="header">
-         <p>SAR</p>
-      </div>
-      <div class="description">
-        <p>Enter the name of app!!</p>
-      </div>
-      <div class="input">
-        <input type="text" class="button" id="tag" name="tag" placeholder="Enter app name here...">
-        <input type="submit" class="button" id="submit" value="Search">
-      </div>
-    </form>
-  </body>
+    <div class="header">
+     <p>SAR</p>
+   </div>
+   <div class="description">
+    <p>Enter the name of app!!</p>
+  </div>
+  <div class="input">
+    <input type="text" class="button" id="tag" name="tag" placeholder="Enter app name here...">
+    <input type="submit" class="button" id="submit" value="Search">
+  </div>
+</form>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#lihijuice').submit(function(e){
+    e.preventDefault();
+    console.log('http://127.0.0.1:5000/search/' + $('#tag').val());
+    jQuery.ajax({                               
+      url: 'http://localhost:5000/search/' + $('#tag').val(),
+      type: 'GET',
+      dataType: "text",
+      error: function(){
+        /*
+        jQuery('.resendbutton').attr('disabled', true).text('Request Failed');
+        setTimeout(function(){
+          jQuery('.resendbutton').attr('disabled', false).text('Request New Code');
+        }, 2000);
+        */
+        alert("API Error");
+      },
+      success: function(resdata) {
+        alert(resdata);
+      },
+      cache: false
+    });
+
+  })
+
+</script>
 
 </html>
