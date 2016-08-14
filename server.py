@@ -32,7 +32,7 @@ def api_sentiment_ext(statement):
     common.set_apikey(apikey)
     api = common.get_api()
     rs = urlopen(api).read()
-    result = json.loads(rs)
+    result = json.dumps(json.loads(rs))
     return '{}'.format(result)
 
 
@@ -52,7 +52,7 @@ def api_review_ext(review_name):
 
     api = common.get_api()
     rs = urlopen(api).read()
-    result = json.loads(rs)
+    result = json.dumps(json.loads(rs))
     return '{}'.format(result)
 
 
@@ -60,6 +60,7 @@ def api_review_ext(review_name):
 def api_search_ext(search_name):
     if search_name == '':
         return "Please specify a valid application name.{}".format(search_name)
+
     api_head = 'https://data.42matters.com/api/v2.0/android/apps/' + \
                'search.json?q={}&include_developer=false&' + \
                'include_desc=false&limit=5&access_token={}'
@@ -72,8 +73,24 @@ def api_search_ext(search_name):
 
     api = common.get_api()
     rs = urlopen(api).read()
-    result = json.loads(rs)
-    return '{}'.format(result)
+
+    result_ = json.loads(rs)
+    dict_ = {}
+    package_name_ = []
+    title_ = []
+    icon_ = []
+
+    for i in result_['results']:
+        package_name_.append(i['package_name'].encode('utf-8'))
+        title_.append(i['title'].encode('utf-8'))
+        icon_.append(i['icon'].encode('utf-8'))
+
+    dict_["package_name"] = package_name_
+    dict_["title"] = title_
+    dict_["icon"] = icon_
+
+    print dict_
+    return '{}'.format(json.dumps(dict_))
 
 
 if __name__ == '__main__':
