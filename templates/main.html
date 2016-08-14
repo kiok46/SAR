@@ -2,10 +2,13 @@
 <head>
   <meta charset="utf-8">
   <title>SAR</title>
+  {% block cssfile %}
   <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+  {% endblock %}
 </head>
 
 <body>
+  {% block content %}
   <form name="ohyeah" id="lihijuice">
     <input type='hidden' name='' value='' />
     <div class="header">
@@ -19,33 +22,8 @@
     <input type="submit" class="button" id="submit" value="Search">
   </div>
 </form>
+{% endblock %}
 </body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type="text/javascript">
-  $('#lihijuice').submit(function(e){
-    e.preventDefault();
-    console.log('http://127.0.0.1:5000/search/' + $('#tag').val());
-    jQuery.ajax({                               
-      url: 'http://localhost:5000/search/' + $('#tag').val(),
-      type: 'GET',
-      dataType: "text",
-      error: function(){
-        /*
-        jQuery('.resendbutton').attr('disabled', true).text('Request Failed');
-        setTimeout(function(){
-          jQuery('.resendbutton').attr('disabled', false).text('Request New Code');
-        }, 2000);
-        */
-        alert("API Error");
-      },
-      success: function(resdata) {
-        alert(resdata);
-      },
-      cache: false
-    });
 
-  })
-
-</script>
 
 </html>

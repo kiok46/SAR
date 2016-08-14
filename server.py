@@ -16,6 +16,9 @@ app = Flask(__name__)
 def api_domain():
     return render_template('main.html')
 
+@app.route('/result')
+def result():
+    return render_template('result.html')
 
 @app.route('/sentiment/<statement>')
 def api_sentiment_ext(statement):
@@ -64,7 +67,7 @@ def api_search_ext(search_name):
     api_head = 'https://data.42matters.com/api/v2.0/android/apps/' + \
                'search.json?q={}&include_developer=false&' + \
                'include_desc=false&limit=5&access_token={}'
-    apikey = '4b0cff026e913e19d5b3a18ac5d8523ee07d8c2f '
+    apikey = '823aafff0eabb49e60edba8bc94ff153712c6104'
 
     common = Common()
     common.set_head(api_head)
