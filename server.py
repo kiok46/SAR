@@ -16,6 +16,9 @@ app = Flask(__name__)
 def api_domain():
     return render_template('main.html')
 
+@app.route('/result')
+def result():
+    return render_template('result.html')
 
 @app.route('/sentiment/<statement>')
 def api_sentiment_ext(statement):
