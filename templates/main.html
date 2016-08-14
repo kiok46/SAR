@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8">
   <title>SAR</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
 
@@ -19,30 +20,43 @@
     <input type="submit" class="button" id="submit" value="Search">
   </div>
 </form>
+<div class="container">
+  <div id="dump">
+   <div class="row">
+
+   </div>
+
+ </div>
+</div>
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 <script type="text/javascript">
   $('#lihijuice').submit(function(e){
     e.preventDefault();
-    console.log('http://127.0.0.1:5000/search/' + $('#tag').val());
     jQuery.ajax({                               
       url: 'http://localhost:5000/search/' + $('#tag').val(),
       type: 'GET',
       dataType: "text",
       error: function(){
-        /*
-        jQuery('.resendbutton').attr('disabled', true).text('Request Failed');
-        setTimeout(function(){
-          jQuery('.resendbutton').attr('disabled', false).text('Request New Code');
-        }, 2000);
-        */
         alert("API Error");
       },
       success: function(resdata) {
-        alert(resdata);
-      },
-      cache: false
-    });
+       obj = jQuery.parseJSON(resdata);
+       icons = obj['icon'];
+       titles = obj['title'];
+       pn = obj['package_name'];
+       counter = titles.length;
+
+       $('#dump > .row').empty();
+
+       var i = 0
+       for(i = 0; i < counter; i++){
+        $('<div class="col s12 m3 l3" data-pn="'+ pn[i] +'"><div class="card small"><div class="card-image"><img src="'+ icons[i] +'"></div><span class="card-title">'+ titles[i] +'</span></div></div>').appendTo('#dump > .row');
+      }
+    },
+    cache: false
+  });
 
   })
 
